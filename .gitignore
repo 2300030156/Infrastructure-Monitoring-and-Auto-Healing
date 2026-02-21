@@ -1,0 +1,19 @@
+﻿# Terraform artifacts
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Local overrides / secrets
+*.tfvars
+*.tfvars.json
+
+# Python
+__pycache__/
+*.pyc
+
+# OS/editor
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
