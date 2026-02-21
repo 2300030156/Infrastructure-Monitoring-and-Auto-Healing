@@ -19,7 +19,7 @@ def health():
 @app.get("/api/status")
 def api_status():
     uptime_seconds = int(time.time() - START_TIME)
-    return jsonify({"status": "healthy", "uptime": str(uptime_seconds)})
+    return jsonify({"status": "healthy", "uptime": uptime_seconds})
 
 
 @app.post("/crash")

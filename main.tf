@@ -120,6 +120,7 @@ resource "google_compute_backend_service" "app_backend" {
   port_name             = "http"
   load_balancing_scheme = "EXTERNAL_MANAGED"
   timeout_sec           = 30
+  session_affinity      = "CLIENT_IP"
   health_checks         = [google_compute_health_check.app_hc.id]
 
   backend {

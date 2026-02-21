@@ -28,7 +28,7 @@ def health():
 @app.get("/api/status")
 def api_status():
     uptime_seconds = int(time.time() - START_TIME)
-    return jsonify({"status": "healthy", "uptime": str(uptime_seconds)})
+    return jsonify({"status": "healthy", "uptime": uptime_seconds})
 
 
 @app.post("/crash")
@@ -230,7 +230,7 @@ cat <<'EOF' > /opt/app/templates/index.html
       statusBadge.classList.remove("unhealthy");
       statusBadge.classList.add("healthy");
       statusText.textContent = "healthy";
-      uptimeEl.textContent = uptime;
+      uptimeEl.textContent = Number.isFinite(uptime) ? uptime : 0;
       messageEl.textContent = "System operating normally.";
       crashBtn.disabled = false;
     }
@@ -256,7 +256,8 @@ cat <<'EOF' > /opt/app/templates/index.html
         }
 
         const data = await response.json();
-        setHealthy(data.uptime ?? "0");
+        const uptime = Number.parseInt(data.uptime, 10);
+        setHealthy(uptime);
       } catch (error) {
         setUnhealthy("Connection Lost. Waiting for auto-healing and instance replacement...");
       }
